@@ -11,8 +11,10 @@ import styles from './GoBoard.module.css'
  *
  * @param {Object} props
  * @param {number} props.size - La taille du plateau (par défaut 9)
+ * @param {boolean} props.darkMode - État du mode sombre
+ * @param {Function} props.onToggleDarkMode - Callback pour activer/désactiver le mode sombre
  */
-const GoBoard = ({ size = 9 }) => {
+const GoBoard = ({ size = 9, darkMode = false, onToggleDarkMode }) => {
   const [board, setBoard] = useState(Array(size).fill(null).map(() => Array(size).fill(null)))
   const [currentColor, setCurrentColor] = useState('black')
   const [showLibertiesMode, setShowLibertiesMode] = useState(false)
@@ -67,6 +69,8 @@ const GoBoard = ({ size = 9 }) => {
       <ControlsBottom
         showLibertiesMode={showLibertiesMode}
         onToggleLibertiesMode={toggleLibertiesMode}
+        darkMode={darkMode}
+        onToggleDarkMode={onToggleDarkMode}
       />
     </div>
   )

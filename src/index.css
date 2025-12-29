@@ -3,13 +3,45 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color: #3a3a3a;
-  background: linear-gradient(135deg, #f8f6f4 0%, #ebe8e3 100%);
+  /* Variables de thème - Mode clair */
+  --bg-gradient-start: #f8f6f4;
+  --bg-gradient-end: #ebe8e3;
+  --text-color: #3a3a3a;
+  --text-secondary: #787878;
+  --board-color: #d4a574;
+  --board-line-color: #5a4a3a;
+  --board-shadow: rgba(0, 0, 0, 0.15);
+  --button-border: #d0d0d0;
+  --button-border-hover: #b0b0b0;
+  --button-text: #666;
+  --button-text-hover: #444;
+
+  color: var(--text-color);
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+:root.dark-mode {
+  /* Variables de thème - Mode sombre */
+  --bg-gradient-start: #1a1a1a;
+  --bg-gradient-end: #2d2d2d;
+  --text-color: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  /* Plateau identique au mode clair */
+  --board-color: #d4a574;
+  --board-line-color: #5a4a3a;
+  --board-shadow: rgba(0, 0, 0, 0.4);
+  /* Boutons plus contrastés en mode sombre */
+  --button-border: #555;
+  --button-border-hover: #777;
+  --button-text: #b0b0b0;
+  --button-text-hover: #e0e0e0;
 }
 
 body {

@@ -15,12 +15,14 @@
 .App h1 {
   margin: 0;
   font-size: 2.5em;
-  color: #4a4a4a;
+  color: var(--text-color);
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .instructions {
-  color: #787878;
+  color: var(--text-secondary);
   font-size: 0.95em;
   margin: 5px 0 20px 0;
+  transition: color 0.3s ease;
 }

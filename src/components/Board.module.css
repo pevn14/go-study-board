@@ -1,20 +1,23 @@
 .goBoardWrapper {
-  background-color: #d4a574;
+  background-color: var(--board-color);
   padding: 30px;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px var(--board-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .goBoard {
   position: relative;
   width: 480px;
   height: 480px;
-  background-color: #d4a574;
+  background-color: var(--board-color);
+  transition: background-color 0.3s ease;
 }
 
 .line {
   position: absolute;
-  background-color: #5a4a3a;
+  background-color: var(--board-line-color);
+  transition: background-color 0.3s ease;
 }
 
 .horizontal {

@@ -14,6 +14,7 @@
 
 .bottomControls {
   margin-top: 15px;
+  gap: 15px;
 }
 
 /* Styles de base des boutons */
@@ -23,9 +24,9 @@
   font-size: 14px;
   font-weight: 400;
   border-radius: 6px;
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--button-border);
   background-color: transparent;
-  color: #666;
+  color: var(--button-text);
   cursor: pointer;
   transition: all 0.2s;
   box-shadow: none;
@@ -34,8 +35,8 @@
 .topControls button:hover,
 .bottomControls button:hover {
   background-color: rgba(0, 0, 0, 0.03);
-  border-color: #b0b0b0;
-  color: #444;
+  border-color: var(--button-border-hover);
+  color: var(--button-text-hover);
 }
 
 .topControls button:focus,
@@ -58,7 +59,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid #b0b0b0;
+  border: 1px solid var(--button-border-hover);
 }
 
 .black {
@@ -72,6 +73,6 @@
 /* État actif du bouton libertés */
 .active {
   background-color: rgba(0, 0, 0, 0.05);
-  border-color: #b0b0b0;
-  color: #444;
+  border-color: var(--button-border-hover);
+  color: var(--button-text-hover);
 }
