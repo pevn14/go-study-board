@@ -16,7 +16,7 @@ const ControlsTop = ({
   return (
     <div className={styles.topControls}>
       <button onClick={onToggleColor} className={styles.colorToggle}>
-        Couleur: <span className={`${styles.colorIndicator} ${styles[currentColor]}`}></span>
+        Pierre : <span className={`${styles.colorIndicator} ${styles[currentColor]}`}></span>
       </button>
       <button onClick={onClearBoard} className={styles.clearButton}>
         Effacer
