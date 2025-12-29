@@ -12,12 +12,53 @@
   gap: 10px;
 }
 
+.app-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .App h1 {
   margin: 0;
   font-size: 2.5em;
   color: var(--text-color);
   font-weight: 500;
   transition: color 0.3s ease;
+}
+
+.theme-toggle {
+  position: absolute;
+  right: -50px;
+  padding: 4px;
+  font-size: 1.2em;
+  background: transparent;
+  border: 1px solid var(--button-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--button-text);
+  opacity: 0.8;
+}
+
+.theme-toggle:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-color: var(--button-border-hover);
+  color: var(--button-text-hover);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:focus,
+.theme-toggle:focus-visible {
+  outline: none;
+  border-color: var(--button-border-hover);
 }
 
 .instructions {

@@ -27,11 +27,20 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Go Study Board</h1>
+      <header className="app-header">
+        <h1>Go Study Board</h1>
+        <button
+          className="theme-toggle"
+          onClick={toggleDarkMode}
+          title={darkMode ? "Passer en mode clair" : "Passer en mode sombre"}
+        >
+          {darkMode ? '☀' : '☾'}
+        </button>
+      </header>
       <p className="instructions">
         Cliquez pour placer/supprimer des pierres
       </p>
-      <GoBoard size={9} darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
+      <GoBoard />
     </div>
   )
 }

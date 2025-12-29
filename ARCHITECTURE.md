@@ -37,8 +37,11 @@ go-study-board/
 ### Hiérarchie
 
 ```
-App
-└── GoBoard (orchestrateur)
+App (gère le thème global)
+├── Header
+│   ├── Titre "Go Study Board"
+│   └── Bouton toggle thème (☾/☀)
+└── GoBoard (orchestrateur du jeu)
     ├── ControlsTop
     │   ├── Bouton toggle couleur
     │   └── Bouton effacer
@@ -53,16 +56,32 @@ App
 
 ### 1. App (App.jsx)
 
-**Rôle**: Composant racine de l'application
+**Rôle**: Composant racine de l'application, gère le thème global (mode clair/sombre)
 
 **Structure**:
-- Titre "Go Study Board"
+- Header avec titre "Go Study Board" et bouton de toggle thème
 - Instructions d'utilisation
 - Composant GoBoard
 
 **Props**: Aucune
 
-**État**: Aucun (composant sans état)
+**État (useState)**:
+- `darkMode`: Mode sombre activé/désactivé
+  - Type: `boolean`
+  - Défaut: Récupéré depuis `localStorage` (ou `false`)
+  - Persisté dans `localStorage`
+
+**Effets (useEffect)**:
+- Applique la classe `dark-mode` sur `:root` quand `darkMode` change
+- Synchronise avec `localStorage` pour persister la préférence utilisateur
+
+**Fonctions**:
+- `toggleDarkMode()`: Bascule entre mode clair et mode sombre
+
+**Responsabilités**:
+- Gestion du thème global de l'application
+- Persistance des préférences utilisateur
+- Structure principale de l'application
 
 ---
 
@@ -70,12 +89,16 @@ App
 
 **Rôle**: Orchestrateur principal - gère l'état global du jeu et coordonne les sous-composants
 
-**Props**:
-- `size` (number, défaut: 9): Dimensions du plateau (9x9)
+**Props**: Aucune (gère sa propre taille en interne)
 
 **État (useState)**:
+- `size`: Taille du plateau
+  - Type: `number`
+  - Défaut: `9` (plateau 9x9)
+  - Note: Géré en interne pour faciliter l'ajout futur d'un contrôle de taille
+
 - `board`: Tableau 2D représentant l'état du plateau
-  - Structure: `Array(9).fill(null).map(() => Array(9).fill(null))`
+  - Structure: `Array(size).fill(null).map(() => Array(size).fill(null))`
   - Valeurs possibles par case: `null`, `'black'`, `'white'`
 
 - `currentColor`: Couleur actuellement sélectionnée
@@ -255,14 +278,43 @@ Les styles utilisent **CSS Modules** pour un scoping automatique :
 - ✅ Nommage unique généré automatiquement (ex: `.stone` → `.Stone_stone__a3b2c`)
 - ✅ Import comme des modules JavaScript : `import styles from './Stone.module.css'`
 
-### Palette de couleurs
+### Système de thème avec CSS Variables
 
-- **Plateau**: `#d4a574` (ton bois clair)
-- **Lignes**: `#5a4a3a` (brun doux)
-- **Fond global**: dégradé `#f8f6f4` → `#ebe8e3`
-- **Boutons**: gris doux `#666` avec bordure `#d0d0d0`
+L'application utilise des **CSS Custom Properties** (variables CSS) pour gérer deux thèmes : clair et sombre.
+
+**Variables définies dans `index.css`**:
+
+Mode clair (`:root`):
+- `--bg-gradient-start`: `#f8f6f4` (fond dégradé début)
+- `--bg-gradient-end`: `#ebe8e3` (fond dégradé fin)
+- `--text-color`: `#3a3a3a` (texte principal)
+- `--text-secondary`: `#787878` (texte secondaire)
+- `--board-color`: `#d4a574` (plateau bois)
+- `--board-line-color`: `#5a4a3a` (lignes du plateau)
+- `--board-shadow`: `rgba(0, 0, 0, 0.15)` (ombre plateau)
+- `--button-border`: `#d0d0d0` (bordure boutons)
+- `--button-border-hover`: `#b0b0b0` (bordure hover)
+- `--button-text`: `#666` (texte boutons)
+- `--button-text-hover`: `#444` (texte hover)
+
+Mode sombre (`:root.dark-mode`):
+- `--bg-gradient-start`: `#1a1a1a`
+- `--bg-gradient-end`: `#2d2d2d`
+- `--text-color`: `#e0e0e0`
+- `--text-secondary`: `#a0a0a0`
+- `--board-color`: `#d4a574` (identique au mode clair)
+- `--board-line-color`: `#5a4a3a` (identique au mode clair)
+- `--board-shadow`: `rgba(0, 0, 0, 0.4)`
+- `--button-border`: `#555` (plus contrasté)
+- `--button-border-hover`: `#777`
+- `--button-text`: `#b0b0b0`
+- `--button-text-hover`: `#e0e0e0`
+
+**Pierres** (styles fixes, non thématisés):
 - **Pierre noire**: gradient radial `#4a4a4a` → `#000`
 - **Pierre blanche**: gradient radial `#fff` → `#d0d0d0`
+
+**Transitions**: Tous les éléments thématisés ont une transition de `0.3s ease` pour un changement fluide.
 
 ### Classes principales
 
@@ -370,7 +422,8 @@ DFS pour trouver le groupe et compter les libertés
 
 ### Séparation des responsabilités
 
-- **GoBoard**: État et coordination uniquement
+- **App**: Gestion du thème global, structure de l'application
+- **GoBoard**: État du jeu et coordination uniquement (taille, plateau, couleur, libertés)
 - **ControlsTop**: Présentation des contrôles d'action, pas de logique métier
 - **ControlsBottom**: Présentation des options d'affichage, pas de logique métier
 - **Board**: Rendu du plateau, pas de gestion d'état
@@ -391,17 +444,20 @@ DFS pour trouver le groupe et compter les libertés
 ## Fonctionnalités
 
 ### Principales
-- Placement/suppression de pierres par clic
-- Sélection de la couleur (noir/blanc)
-- Effacement du plateau
-- Calcul et affichage des degrés de liberté
+- **Thème clair/sombre**: Bascule entre mode jour et mode nuit avec persistance
+- **Placement/suppression de pierres**: Par clic sur les intersections
+- **Sélection de la couleur**: Noir/blanc avec indicateur visuel
+- **Effacement du plateau**: Réinitialisation complète
+- **Calcul et affichage des degrés de liberté**: Mode toggleable
 
 ### Interface
 - Plateau 9x9 avec pierres sur les intersections
 - Points d'étoile (hoshi) aux positions standard
 - Design doux et apaisant avec thème bois
+- Thème sombre élégant pour réduire la fatigue oculaire
 - Boutons discrets et élégants
-- Transitions fluides
+- Transitions fluides entre les thèmes
+- Persistance des préférences utilisateur (thème)
 
 ---
 
@@ -418,10 +474,11 @@ DFS pour trouver le groupe et compter les libertés
 - ControlsTop et ControlsBottom sont indépendants et réutilisables
 
 ### Extensibilité
-- Facile d'ajouter de nouveaux contrôles dans ControlsTop ou ControlsBottom
-- Séparation claire entre contrôles d'action (haut) et options d'affichage (bas)
-- Possible d'étendre Board pour supporter différentes tailles
-- Logique métier isolée dans utils/ facilite les évolutions
+- **État `size` géré dans GoBoard**: Facilite l'ajout futur d'un contrôle pour changer la taille du plateau
+- **Facile d'ajouter de nouveaux contrôles** dans ControlsTop ou ControlsBottom
+- **Séparation claire** entre contrôles d'action (haut) et options d'affichage (bas)
+- **Thème centralisé avec CSS Variables**: Facile d'ajouter de nouveaux thèmes ou couleurs
+- **Logique métier isolée** dans utils/ facilite les évolutions
 
 ### Lisibilité
 - Code plus court et focalisé dans chaque fichier
