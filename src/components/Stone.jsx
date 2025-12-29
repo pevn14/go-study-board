@@ -1,4 +1,4 @@
-import './Stone.css'
+import styles from './Stone.module.css'
 
 /**
  * Composant représentant une pierre (noire ou blanche) sur le plateau de Go
@@ -10,9 +10,9 @@ import './Stone.css'
  */
 const Stone = ({ color, showLibertiesCount = false, libertiesCount = 0 }) => {
   return (
-    <div className={`stone ${color}`}>
+    <div className={`${styles.stone} ${styles[color]}`}>
       {showLibertiesCount && (
-        <span className="liberties-count">
+        <span className={styles.libertiesCount}>
           {libertiesCount}
         </span>
       )}

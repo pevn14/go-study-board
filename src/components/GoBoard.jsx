@@ -3,7 +3,7 @@ import Board from './Board'
 import ControlsTop from './ControlsTop'
 import ControlsBottom from './ControlsBottom'
 import { calculateLiberties } from '../utils/liberties'
-import './GoBoard.css'
+import styles from './GoBoard.module.css'
 
 /**
  * Composant principal orchestrant le plateau de Go
@@ -49,7 +49,7 @@ const GoBoard = ({ size = 9 }) => {
   }
 
   return (
-    <div className="go-board-container">
+    <div className={styles.goBoardContainer}>
       <ControlsTop
         currentColor={currentColor}
         onToggleColor={toggleColor}

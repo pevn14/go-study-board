@@ -1,4 +1,4 @@
-import './Controls.css'
+import styles from './Controls.module.css'
 
 /**
  * Composant regroupant les contrôles d'action en haut du plateau
@@ -14,11 +14,11 @@ const ControlsTop = ({
   onClearBoard
 }) => {
   return (
-    <div className="top-controls">
-      <button onClick={onToggleColor} className="color-toggle">
-        Couleur: <span className={`color-indicator ${currentColor}`}></span>
+    <div className={styles.topControls}>
+      <button onClick={onToggleColor} className={styles.colorToggle}>
+        Couleur: <span className={`${styles.colorIndicator} ${styles[currentColor]}`}></span>
       </button>
-      <button onClick={onClearBoard} className="clear-button">
+      <button onClick={onClearBoard} className={styles.clearButton}>
         Effacer
       </button>
     </div>

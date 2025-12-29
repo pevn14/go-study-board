@@ -10,17 +10,17 @@ Application React + Vite pour l'étude du jeu de Go, permettant de placer des pi
 go-study-board/
 ├── src/
 │   ├── components/
-│   │   ├── GoBoard.jsx          # Orchestrateur principal
-│   │   ├── GoBoard.css          # Styles du conteneur principal
-│   │   ├── Board.jsx            # Plateau avec lignes et intersections
-│   │   ├── Board.css            # Styles du plateau
-│   │   ├── Intersection.jsx     # Point cliquable du plateau
-│   │   ├── Intersection.css     # Styles des intersections
-│   │   ├── Stone.jsx            # Pierre individuelle
-│   │   ├── Stone.css            # Styles des pierres
-│   │   ├── ControlsTop.jsx      # Contrôles du haut (Couleur, Effacer)
-│   │   ├── ControlsBottom.jsx   # Contrôles du bas (Libertés)
-│   │   └── Controls.css         # Styles communs des contrôles
+│   │   ├── GoBoard.jsx             # Orchestrateur principal
+│   │   ├── GoBoard.module.css      # Styles du conteneur (CSS Modules)
+│   │   ├── Board.jsx               # Plateau avec lignes et intersections
+│   │   ├── Board.module.css        # Styles du plateau (CSS Modules)
+│   │   ├── Intersection.jsx        # Point cliquable du plateau
+│   │   ├── Intersection.module.css # Styles des intersections (CSS Modules)
+│   │   ├── Stone.jsx               # Pierre individuelle
+│   │   ├── Stone.module.css        # Styles des pierres (CSS Modules)
+│   │   ├── ControlsTop.jsx         # Contrôles du haut (Couleur, Effacer)
+│   │   ├── ControlsBottom.jsx      # Contrôles du bas (Libertés)
+│   │   └── Controls.module.css     # Styles communs des contrôles (CSS Modules)
 │   ├── utils/
 │   │   └── liberties.js         # Logique de calcul des libertés
 │   ├── App.jsx                  # Composant racine
@@ -242,13 +242,18 @@ App
 
 ### Structure des styles
 
-Les styles sont modulaires :
+Les styles utilisent **CSS Modules** pour un scoping automatique :
 
-- `GoBoard.css`: Container principal uniquement
-- `Board.css`: Plateau, lignes
-- `Intersection.css`: Intersections, points d'étoile, hover
-- `Stone.css`: Pierres, libertés
-- `Controls.css`: Styles communs pour TopControls et BottomControls (boutons, indicateurs)
+- `GoBoard.module.css`: Container principal uniquement
+- `Board.module.css`: Plateau, lignes
+- `Intersection.module.css`: Intersections, points d'étoile, hover
+- `Stone.module.css`: Pierres, libertés
+- `Controls.module.css`: Styles communs pour ControlsTop et ControlsBottom (boutons, indicateurs)
+
+**Avantages des CSS Modules** :
+- ✅ Scoping automatique : pas de conflits de noms de classes
+- ✅ Nommage unique généré automatiquement (ex: `.stone` → `.Stone_stone__a3b2c`)
+- ✅ Import comme des modules JavaScript : `import styles from './Stone.module.css'`
 
 ### Palette de couleurs
 
@@ -261,44 +266,44 @@ Les styles sont modulaires :
 
 ### Classes principales
 
-#### GoBoard.css
-- `.go-board-container`: Container flex principal (column, centré, gap 20px)
+#### GoBoard.module.css
+- `.goBoardContainer`: Container flex principal (column, centré, gap 20px)
 
-#### Board.css
-- `.go-board-wrapper`: Wrapper avec fond bois et ombre
-- `.go-board`: Plateau 480x480px
+#### Board.module.css
+- `.goBoardWrapper`: Wrapper avec fond bois et ombre
+- `.goBoard`: Plateau 480x480px
 - `.line`: Lignes du plateau (1.2px)
-- `.line.horizontal`: Ligne horizontale (width: 100%)
-- `.line.vertical`: Ligne verticale (height: 100%)
+- `.horizontal`: Ligne horizontale (width: 100%)
+- `.vertical`: Ligne verticale (height: 100%)
 
-#### Intersection.css
+#### Intersection.module.css
 - `.intersection`: Point cliquable 24x24px, transform translate(-50%, -50%)
 - `.intersection:hover::after`: Cercle blanc semi-transparent
-- `.intersection.star-point::before`: Point d'étoile (hoshi) 6x6px
+- `.starPoint::before`: Point d'étoile (hoshi) 6x6px
 
-#### Stone.css
+#### Stone.module.css
 - `.stone`: Pierre 44x44px, border-radius 50%, shadow
-- `.stone.black`: Gradient radial noir
-- `.stone.white`: Gradient radial blanc
-- `.liberties-count`: Texte 11px, bold, centré
-- `.stone.black .liberties-count`: Blanc avec text-shadow
-- `.stone.white .liberties-count`: Noir avec text-shadow
+- `.black`: Gradient radial noir (appliqué avec `.stone`)
+- `.white`: Gradient radial blanc (appliqué avec `.stone`)
+- `.libertiesCount`: Texte 11px, bold, centré
+- `.stone.black .libertiesCount`: Blanc avec text-shadow
+- `.stone.white .libertiesCount`: Noir avec text-shadow
 
-#### Controls.css
+#### Controls.module.css
 **Containers**:
-- `.top-controls`: Container flex row, gap 15px, margin-bottom 10px
-- `.bottom-controls`: Container flex, centré, margin-top 15px
+- `.topControls`: Container flex row, gap 15px, margin-bottom 10px
+- `.bottomControls`: Container flex, centré, margin-top 15px
 
 **Boutons communs**:
-- `.top-controls button`, `.bottom-controls button`: Style de base (padding, bordure, couleurs, transitions)
+- `.topControls button`, `.bottomControls button`: Style de base (padding, bordure, couleurs, transitions)
 - États `:hover` et `:focus`
 
 **Spécifiques**:
-- `.color-toggle`: Bouton toggle couleur, flex avec gap 8px
-- `.color-indicator`: Cercle 20x20px avec gradient
-- `.color-indicator.black`: Gradient noir
-- `.color-indicator.white`: Gradient blanc
-- `.liberties-toggle.active`: État actif du bouton libertés
+- `.colorToggle`: Bouton toggle couleur, flex avec gap 8px
+- `.colorIndicator`: Cercle 20x20px avec gradient
+- `.black`: Gradient noir (pour indicateur)
+- `.white`: Gradient blanc (pour indicateur)
+- `.active`: État actif du bouton libertés
 
 ---
 

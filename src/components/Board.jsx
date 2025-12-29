@@ -1,5 +1,5 @@
 import Intersection from './Intersection'
-import './Board.css'
+import styles from './Board.module.css'
 
 /**
  * Composant représentant le plateau de Go avec ses lignes et intersections
@@ -28,13 +28,13 @@ const Board = ({
   }
 
   return (
-    <div className="go-board-wrapper">
-      <div className="go-board" style={{ '--board-size': size }}>
+    <div className={styles.goBoardWrapper}>
+      <div className={styles.goBoard} style={{ '--board-size': size }}>
         {/* Lignes horizontales */}
         {Array.from({ length: size }).map((_, i) => (
           <div
             key={`h-${i}`}
-            className="line horizontal"
+            className={`${styles.line} ${styles.horizontal}`}
             style={{ top: `${i * (100 / (size - 1))}%` }}
           />
         ))}
@@ -43,7 +43,7 @@ const Board = ({
         {Array.from({ length: size }).map((_, i) => (
           <div
             key={`v-${i}`}
-            className="line vertical"
+            className={`${styles.line} ${styles.vertical}`}
             style={{ left: `${i * (100 / (size - 1))}%` }}
           />
         ))}

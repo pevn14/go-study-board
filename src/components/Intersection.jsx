@@ -1,5 +1,5 @@
 import Stone from './Stone'
-import './Intersection.css'
+import styles from './Intersection.module.css'
 
 /**
  * Composant représentant une intersection du plateau de Go
@@ -31,7 +31,7 @@ const Intersection = ({
 
   return (
     <div
-      className={`intersection ${isStarPoint ? 'star-point' : ''}`}
+      className={`${styles.intersection} ${isStarPoint ? styles.starPoint : ''}`}
       style={{
         top: `${row * (100 / (size - 1))}%`,
         left: `${col * (100 / (size - 1))}%`

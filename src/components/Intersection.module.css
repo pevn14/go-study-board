@@ -20,7 +20,7 @@
   pointer-events: none;
 }
 
-.intersection.star-point::before {
+.starPoint::before {
   content: '';
   position: absolute;
   width: 6px;

@@ -1,24 +1,24 @@
 /* Styles communs pour tous les panneaux de contrôles */
 
 /* Containers des contrôles */
-.top-controls,
-.bottom-controls {
+.topControls,
+.bottomControls {
   display: flex;
   justify-content: center;
 }
 
-.top-controls {
+.topControls {
   gap: 15px;
   margin-bottom: 10px;
 }
 
-.bottom-controls {
+.bottomControls {
   margin-top: 15px;
 }
 
 /* Styles de base des boutons */
-.top-controls button,
-.bottom-controls button {
+.topControls button,
+.bottomControls button {
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 400;
@@ -31,29 +31,29 @@
   box-shadow: none;
 }
 
-.top-controls button:hover,
-.bottom-controls button:hover {
+.topControls button:hover,
+.bottomControls button:hover {
   background-color: rgba(0, 0, 0, 0.03);
   border-color: #b0b0b0;
   color: #444;
 }
 
-.top-controls button:focus,
-.top-controls button:focus-visible,
-.bottom-controls button:focus,
-.bottom-controls button:focus-visible {
+.topControls button:focus,
+.topControls button:focus-visible,
+.bottomControls button:focus,
+.bottomControls button:focus-visible {
   outline: none;
 }
 
 /* Bouton toggle couleur */
-.color-toggle {
+.colorToggle {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 /* Indicateur de couleur */
-.color-indicator {
+.colorIndicator {
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -61,16 +61,16 @@
   border: 1px solid #b0b0b0;
 }
 
-.color-indicator.black {
+.black {
   background: linear-gradient(135deg, #2c2c2c 0%, #000 100%);
 }
 
-.color-indicator.white {
+.white {
   background: linear-gradient(135deg, #fff 0%, #e8e8e8 100%);
 }
 
 /* État actif du bouton libertés */
-.liberties-toggle.active {
+.active {
   background-color: rgba(0, 0, 0, 0.05);
   border-color: #b0b0b0;
   color: #444;

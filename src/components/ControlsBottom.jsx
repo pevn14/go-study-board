@@ -1,4 +1,4 @@
-import './Controls.css'
+import styles from './Controls.module.css'
 
 /**
  * Composant regroupant les contrôles d'affichage en bas du plateau
@@ -12,10 +12,10 @@ const ControlsBottom = ({
   onToggleLibertiesMode
 }) => {
   return (
-    <div className="bottom-controls">
+    <div className={styles.bottomControls}>
       <button
         onClick={onToggleLibertiesMode}
-        className={`liberties-toggle ${showLibertiesMode ? 'active' : ''}`}
+        className={`${styles.libertiesToggle} ${showLibertiesMode ? styles.active : ''}`}
         title="Afficher les degrés de liberté"
       >
         Libertés {showLibertiesMode ? '✓' : ''}
