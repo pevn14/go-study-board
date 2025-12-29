@@ -1,0 +1,32 @@
+.intersection {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.intersection:hover::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.intersection.star-point::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #5a4a3a;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
